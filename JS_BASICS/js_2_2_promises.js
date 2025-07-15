@@ -27,3 +27,27 @@ map.set("age",30);
 console.log(map.get("name"));
 
 //Promise class gives you a promise, that I will return you something in the future.
+
+
+
+setTimeout(function(){
+    console.log("This is a delayed message by 1 second");
+    setTimeout(function(){
+        console.log("This is a delayed message by 3 seconds after first message");
+    },3000);
+},1000);
+
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function solve() {
+    await delay(1000);
+    console.log("Message after 1 second");
+    await delay(3000);
+    console.log("Message after 3 seconds");
+}
+
+solve();
+
