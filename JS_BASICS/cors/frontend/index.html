@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>SUM</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.10.0/axios.min.js"></script>
+    <script>
+        function addNum() {
+            const a = document.getElementById("a").value;
+            const b = document.getElementById("b").value;
+            axios.post("http://localhost:3000/sum", {
+                a: parseInt(a),
+                b: parseInt(b)
+            })
+                .then(response => {
+                    document.getElementById("result").innerText = "Sum = " + response.data.result;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="a" placeholder="a">
+    <input type="text" id="b" placeholder="b">
+    <button onclick="addNum()">SUM</button>
+    <p id="result"></p>
+</body>
+
+</html>
