@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>AUTH</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.10.0/axios.min.js"></script>
+        <script>
+            async function signup(){
+                const username=document.getElementById("usernameup").value;
+                const password=document.getElementById("passwordup").value;
+
+                await axios.post("http://localhost:3001/signup",{
+                    username:username,
+                    password:password
+                });
+                alert("User Created Successfully");
+            }
+            async function signin(){
+                const username=document.getElementById("usernamein").value;
+                const password=document.getElementById("passwordin").value;
+
+                const response = await axios.post("http://localhost:3001/signin",{
+                    username:username,
+                    password:password
+                });
+
+                localStorage.setItem("token",response.data.token);
+                alert("User signed in");
+            }
+
+            async function getInformation(){
+                const response = await axios.get("http://localhost:3001/me", {
+                    headers: {
+                        token : localStorage.getItem("token"), 
+                    }
+                });
+                document.getElementById("UserInformation").innerHTML= "username : " + response.data.username + " password : " + response.data.password;
+                
+            }
+            function logout(){
+                localStorage.removeItem("token");
+                document.getElementById("UserInformation").innerHTML = "";
+                alert("User logged out");
+            }
+            getInformation();
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1>SignUp</h1>
+            <input type="text", placeholder="usernmae" id="usernameup"></input>
+            <input type="text", placeholder="password" id="passwordup"></input>
+            <button onclick="signup()"> SignUp</button>
+        </div>
+        <div>
+            <h1>SignIn</h1>
+            <input type="text", placeholder="usernmae" id="usernamein"></input>
+            <input type="text", placeholder="password" id="passwordin"></input>
+            <button onclick="signin()"> SignIn</button>
+        </div>
+        <div>
+            <h2>UserInformation</h2>
+            <div id="UserInformation"></div>
+        </div>
+        <div>
+            <button id="logout" onclick="logout()">Logout</button>
+        </div>
+    </body>
+</html>
