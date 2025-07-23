@@ -40,7 +40,7 @@ app.post("/signin",(req,res)=>{
     }
     else{
         const token = jwt.sign({
-            username: users[i].username,
+            username: foundUser.username,
         },JWT_SECRET);
         res.json({
             token:token,
