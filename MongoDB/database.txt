@@ -1,0 +1,5 @@
+NoSQL & SQL
+
+MongoDB -> NoSQL 
+
+// mongodb+srv://daveaditya2004:TKi9QVpgSMk7klRV@cluster0.7k3v38c.mongodb.net/
